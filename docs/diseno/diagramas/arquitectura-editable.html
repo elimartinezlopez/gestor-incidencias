@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Arquitectura</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:1060px;font-family:"Liberation Sans",Arial,sans-serif;background:#fff;color:#1d2733;position:relative}
+.b{position:absolute;border:1.6px solid #365f91;border-radius:9px;background:#eef3f9;padding:8px 10px;font-size:14px;line-height:1.35;text-align:center}
+.b b{font-size:15px}
+.fw{background:#fdecea;border-color:#c0392b}
+.dark{background:#365f91;color:#fff;border-color:#2f4f6f}
+.wh{background:#fff}
+.zone{position:absolute;border:2px solid #365f91;border-radius:14px;background:#f6f9fc}
+.zone .t{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:15px;color:#2f4f6f}
+.vb{position:absolute;left:20px;top:100px;width:1560px;height:945px;border:2px dashed #8aa2c0;border-radius:16px}
+.vb span{position:absolute;top:-12px;left:24px;background:#fff;padding:0 8px;font-weight:bold;color:#2f4f6f;font-size:15px}
+.cloud{position:absolute;border:2px dashed #365f91;border-radius:50%;background:#fff;font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;line-height:1.3}
+.db{border-radius:12px/22px}
+svg{position:absolute;left:0;top:0}
+.lg{position:absolute;font-size:13px;line-height:1.9}
+.lg i{display:inline-block;width:34px;height:0;border-top:3px solid;vertical-align:middle;margin-right:8px}
+</style></head><body>
+<div class="vb"><span>Equipo anfitrión · VirtualBox</span></div>
+
+<div class="cloud" style="left:620px;top:14px;width:360px;height:66px">Internet<br>(solo actualizaciones y paquetes)</div>
+<div class="cloud" style="left:1180px;top:14px;width:280px;height:66px"><span><b>GitHub</b><br>repositorio del código</span></div>
+
+<div class="b dark" style="left:620px;top:125px;width:360px;height:72px"><b>Router / NAT + servidor DHCP</b><br>Red NAT «red_incidencias» · 192.168.50.1<br>DHCP para clientes: .100 – .150</div>
+<div class="b" style="left:650px;top:228px;width:300px;height:52px;background:#dfe8f4"><b>Switch virtual</b> · 192.168.50.0/24</div>
+
+<!-- Clientes -->
+<div class="b wh" style="left:45px;top:390px;width:330px;height:100px"><b>cliente-usuario</b> · IP por DHCP<br>Lubuntu · navegador web<br>Perfil: usuario</div>
+<div class="b wh" style="left:45px;top:560px;width:330px;height:100px"><b>cliente-técnico</b> · IP por DHCP<br>Windows 10/11 · navegador + cliente SSH<br>Perfil: técnico / administrador</div>
+
+<!-- srv-web -->
+<div class="zone" style="left:470px;top:340px;width:610px;height:690px"><div class="t"><b>srv-web · 192.168.50.10</b><br>Ubuntu Server 26.04 LTS · 2 vCPU · 2 GB RAM · 25 GB</div></div>
+<div class="b fw" style="left:495px;top:415px;width:390px;height:100px"><b>Cortafuegos UFW + Fail2ban</b><br>Abiertos: 80 (redirige a 443) y 443<br>SSH 22 solo red interna · 10050 solo srv-backup<br>Resto del tráfico entrante: denegado</div>
+<div class="b" style="left:495px;top:550px;width:390px;height:78px"><b>Apache 2.4</b> (mod_ssl, mod_rewrite)<br>VirtualHost https://incidencias.local<br>Certificado emitido por la CA propia</div>
+<div class="b" style="left:495px;top:665px;width:390px;height:80px"><b>Aplicación Laravel 13</b><br>PHP 8.5-FPM · Blade · Bootstrap / AdminLTE<br>Adjuntos en storage/app (zona privada)</div>
+<div class="b db" style="left:495px;top:785px;width:390px;height:105px;background:#e3eefa"><b>MySQL 8.4 LTS</b><br>Base de datos «incidencias» (utf8mb4)<br>Solo escucha en 127.0.0.1:3306<br>Usuario «app_incidencias» con permisos mínimos</div>
+<div class="b" style="left:905px;top:415px;width:155px;height:70px"><b>Agente Zabbix</b><br>puerto 10050</div>
+<div class="b" style="left:905px;top:910px;width:155px;height:100px"><b>Script de copias</b><br>backup_incidencias.sh<br>cron diario 02:30</div>
+
+<!-- srv-backup -->
+<div class="zone" style="left:1150px;top:340px;width:410px;height:470px"><div class="t"><b>srv-backup · 192.168.50.20</b><br>Ubuntu Server 26.04 LTS · 2 vCPU · 2 GB RAM · 30 GB</div></div>
+<div class="b fw" style="left:1175px;top:415px;width:360px;height:62px"><b>Cortafuegos UFW</b><br>22 y 443 solo desde la red interna</div>
+<div class="b" style="left:1175px;top:520px;width:360px;height:100px"><b>Zabbix Server 7.0 LTS</b> · puerto 10051<br>Interfaz web de Zabbix (HTTPS)<br>Gráficas y alertas de srv-web</div>
+<div class="b" style="left:1175px;top:665px;width:360px;height:100px"><b>Almacén de copias</b><br>/srv/copias/incidencias<br>Recibe las copias por rsync sobre SSH · 7 días</div>
+
+<!-- Leyenda -->
+<div class="lg" style="left:1150px;top:840px;width:410px">
+<b style="font-size:14px">Conexiones</b><br>
+<i style="border-color:#365f91"></i>Red física / virtual (cableado)<br>
+<i style="border-color:#2e7d32"></i>Acceso a la aplicación (HTTPS 443) y SSH 22<br>
+<i style="border-color:#e08a2c"></i>Monitorización Zabbix (10050)<br>
+<i style="border-color:#7a6aa8"></i>Copias de seguridad (mysqldump + rsync/SSH)<br>
+<i style="border-color:#365f91;border-top-style:dashed"></i>Internet / despliegue desde GitHub
+</div>
+
+<svg width="1600" height="1060" viewBox="0 0 1600 1060">
+<defs>
+ <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 10 10"><path d="M0,0 L10,5 L0,10 z" fill="#365f91"/></marker>
+ <marker id="g" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 10 10"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d32"/></marker>
+ <marker id="o" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 10 10"><path d="M0,0 L10,5 L0,10 z" fill="#e08a2c"/></marker>
+ <marker id="p" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 10 10"><path d="M0,0 L10,5 L0,10 z" fill="#7a6aa8"/></marker>
+</defs>
+<g fill="none" stroke-width="2.2" font-family="Liberation Sans" font-size="13">
+ <!-- internet - router -->
+ <path d="M800,80 V125" stroke="#365f91" stroke-dasharray="7 5" marker-end="url(#a)"/>
+ <text x="808" y="108" fill="#1f3a5a" stroke="none">NAT</text>
+ <!-- router - switch -->
+ <path d="M800,197 V228" stroke="#365f91"/>
+ <!-- bus -->
+ <path d="M800,280 V310 M420,310 H1355 M420,310 V610 M420,440 H375 M420,610 H375 M775,310 V340 M1355,310 V340" stroke="#365f91"/>
+ <!-- usuario -> web -->
+ <path d="M375,470 H440 V480 H493" stroke="#2e7d32" marker-end="url(#g)"/>
+ <text x="383" y="462" fill="#2e7d32" stroke="none">HTTPS 443</text>
+ <!-- tecnico -> web -->
+ <path d="M375,640 H450 V500 H493" stroke="#2e7d32" marker-end="url(#g)"/>
+ <text x="383" y="632" fill="#2e7d32" stroke="none">HTTPS · SSH</text>
+ <!-- stack -->
+ <path d="M690,515 V548" stroke="#365f91" marker-end="url(#a)"/>
+ <path d="M690,628 V663" stroke="#365f91" marker-end="url(#a)"/><text x="700" y="651" fill="#1f3a5a" stroke="none">PHP-FPM</text>
+ <path d="M690,745 V783" stroke="#365f91" marker-end="url(#a)"/><text x="700" y="770" fill="#1f3a5a" stroke="none">PDO · 3306 local</text>
+ <!-- zabbix -> agente -->
+ <path d="M1175,570 H1110 V450 H1062" stroke="#e08a2c" marker-end="url(#o)"/>
+ <text x="1116" y="520" fill="#e08a2c" stroke="none">10050</text>
+ <!-- backup -->
+ <path d="M905,960 H860 V892" stroke="#7a6aa8" stroke-dasharray="6 4" marker-end="url(#p)"/>
+ <text x="790" y="930" fill="#7a6aa8" stroke="none">mysqldump</text>
+ <path d="M1060,960 H1125 V715 H1173" stroke="#7a6aa8" marker-end="url(#p)"/>
+ <text x="1063" y="952" fill="#7a6aa8" stroke="none" font-size="11.5">rsync/SSH</text>
+ <!-- github -> laravel -->
+ <path d="M1300,80 V100 H1100 V705 H887" stroke="#365f91" stroke-dasharray="7 5" marker-end="url(#a)"/>
+ <text x="900" y="728" fill="#1f3a5a" stroke="none">git pull (despliegue)</text>
+</g>
+</svg>
+</body></html>

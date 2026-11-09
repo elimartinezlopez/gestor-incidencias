@@ -1,0 +1,17 @@
+graph RED {
+  graph [rankdir=TB, fontname="Liberation Sans", bgcolor="white", pad=0.3, nodesep=0.6, ranksep=0.7];
+  node [fontname="Liberation Sans", fontsize=11, shape=box, style="rounded,filled", fillcolor="#eef3f9", color="#365f91", penwidth=1.4];
+  edge [color="#365f91", penwidth=1.4];
+  inet [label="Internet\n(acceso para actualizaciones)", shape=ellipse, fillcolor="#ffffff", style="filled,dashed"];
+  host [label=<<B>Equipo anfitrión</B><BR/>PC de la alumna (Windows)<BR/>VirtualBox · VS Code · Git>, fillcolor="#dfe8f4"];
+  nat [label=<<B>Red NAT de VirtualBox «red_incidencias»</B><BR/>192.168.50.0/24 · puerta de enlace 192.168.50.1>, shape=box, style="filled", fillcolor="#365f91", fontcolor="white"];
+  web [label=<<B>srv-web</B> · 192.168.50.10<BR/>Ubuntu Server 26.04 LTS<BR/>Apache 2.4 + PHP 8.5-FPM<BR/>Laravel · MySQL 8.4 (solo local)<BR/>UFW · Fail2ban · Agente Zabbix<BR/>Puertos abiertos: 443/80 (→443), 22 restringido>];
+  mon [label=<<B>srv-backup</B> · 192.168.50.20<BR/>Ubuntu Server 26.04 LTS<BR/>Zabbix Server 7.0 LTS<BR/>Destino de copias (rsync/SSH)<BR/>UFW>];
+  c1 [label=<<B>cliente-usuario</B> · DHCP<BR/>Lubuntu<BR/>Navegador → https://incidencias.local>, fillcolor="#ffffff"];
+  c2 [label=<<B>cliente-técnico</B> · DHCP<BR/>Windows 10/11<BR/>Navegador · cliente SSH>, fillcolor="#ffffff"];
+  inet -- host [style=dashed];
+  host -- nat;
+  nat -- web; nat -- mon; nat -- c1; nat -- c2;
+  {rank=same; web; mon}
+  {rank=same; c1; c2}
+}

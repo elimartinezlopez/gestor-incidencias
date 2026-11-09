@@ -1,0 +1,223 @@
+Summary,Description,Issue Type,Labels,Start date,Due date,Original Estimate,Status
+"GI-01 · Definir la idea, el alcance y los objetivos","Elegir el problema a resolver, delimitar qué entra en la primera versión y redactar los objetivos generales y específicos.
+
+Fase: 1. Planificación inicial
+Depende de: ninguna
+Estimación: 6 h
+Criterio de finalización: Título, descripción, justificación y objetivos redactados en el anteproyecto.",Task,Fase1-Planificacion,19/10/2026,23/10/2026,21600,Finalizado
+GI-02 · Redactar y entregar el anteproyecto (Entregable 2),"Completar los once apartados del anteproyecto y corregirlo según los comentarios del profesor.
+
+Fase: 1. Planificación inicial
+Depende de: GI-01
+Estimación: 14 h
+Criterio de finalización: Anteproyecto entregado y comentarios del profesor aplicados.",Task,Fase1-Planificacion,26/10/2026,06/11/2026,50400,Finalizado
+GI-03 · Crear el tablero Kanban en Jira,"Crear el proyecto en Jira con las columnas Pendiente, En curso, En revisión o pruebas y Finalizado, cargar todas las tareas y compartirlo con el profesor.
+
+Fase: 1. Planificación inicial
+Depende de: GI-02
+Estimación: 3 h
+Criterio de finalización: Tablero con todas las tareas y enlace accesible para el profesor.",Task,Fase1-Planificacion,09/11/2026,10/11/2026,10800,En curso
+GI-04 · Crear el repositorio en GitHub,"Crear el repositorio público con su estructura de carpetas (docs, diseño, web) y subir la documentación inicial.
+
+Fase: 1. Planificación inicial
+Depende de: GI-02
+Estimación: 2 h
+Criterio de finalización: Repositorio público con la estructura de carpetas y el anteproyecto subido.",Task,Fase1-Planificacion,09/11/2026,09/11/2026,7200,En curso
+GI-05 · Redactar el README.md,"Presentación resumida del proyecto: descripción, justificación, objetivos, tecnologías, funcionalidades, planificación, estado, diseño y enlaces.
+
+Fase: 1. Planificación inicial
+Depende de: GI-04
+Estimación: 3 h
+Criterio de finalización: README con los diez apartados pedidos y todos los enlaces funcionando.",Task,Fase1-Planificacion,10/11/2026,12/11/2026,10800,En curso
+GI-06 · Publicar la web del proyecto en GitHub Pages,"Página HTML/CSS de presentación del proyecto publicada con GitHub Pages.
+
+Fase: 1. Planificación inicial
+Depende de: GI-04
+Estimación: 5 h
+Criterio de finalización: Web accesible desde la URL de GitHub Pages con los enlaces al repositorio y a Jira.",Task,Fase1-Planificacion,10/11/2026,13/11/2026,18000,En curso
+GI-07 · Detallar requisitos y permisos por perfil,"Listar qué puede hacer el usuario y qué puede hacer el técnico en cada pantalla (matriz de permisos).
+
+Fase: 2. Análisis y diseño
+Depende de: GI-02
+Estimación: 4 h
+Criterio de finalización: Matriz de permisos revisada y coherente con los prototipos.",Task,Fase2-Analisis-diseno,16/11/2026,18/11/2026,14400,Pendiente
+GI-08 · Cerrar el flujo de estados de una incidencia,"Definir las transiciones permitidas entre Abierta, Asignada, En curso, En espera, Resuelta y Cerrada, y quién puede hacer cada cambio.
+
+Fase: 2. Análisis y diseño
+Depende de: GI-07
+Estimación: 2 h
+Criterio de finalización: Diagrama o tabla de transiciones documentado en el repositorio.",Task,Fase2-Analisis-diseno,19/11/2026,20/11/2026,7200,Pendiente
+GI-09 · Prototipos de todas las pantallas,"Maquetas de cada opción del menú del usuario y del técnico, con su explicación.
+
+Fase: 2. Análisis y diseño
+Depende de: GI-01
+Estimación: 10 h
+Criterio de finalización: Una maqueta por opción del menú, subida a docs/diseno/prototipos.",Task,Fase2-Analisis-diseno,02/11/2026,13/11/2026,36000,En revisión o pruebas
+GI-10 · Diagrama de arquitectura y especificación técnica,"Diagrama con servidores, sistemas, servicios, red, IP, cortafuegos, base de datos y clientes, junto con la tabla de componentes.
+
+Fase: 2. Análisis y diseño
+Depende de: GI-02
+Estimación: 4 h
+Criterio de finalización: Diagrama (editable y PNG) y tabla incluidos en el anteproyecto y en el repositorio.",Task,Fase2-Analisis-diseno,09/11/2026,13/11/2026,14400,En revisión o pruebas
+GI-11 · Modelo Entidad-Relación definitivo y paso a tablas,"Revisar el modelo E-R y definir tablas, tipos de datos, claves y valores ENUM.
+
+Fase: 2. Análisis y diseño
+Depende de: GI-07, GI-08
+Estimación: 5 h
+Criterio de finalización: Esquema de tablas listo para crear las migraciones.",Task,Fase2-Analisis-diseno,23/11/2026,27/11/2026,18000,Pendiente
+GI-12 · Plan de direccionamiento y de seguridad,"Cerrar IP, nombres de máquina, puertos abiertos, reglas de cortafuegos y política de copias.
+
+Fase: 2. Análisis y diseño
+Depende de: GI-10
+Estimación: 3 h
+Criterio de finalización: Tabla de IP y reglas de cortafuegos documentadas.",Task,Fase2-Analisis-diseno,30/11/2026,04/12/2026,10800,Pendiente
+GI-13 · Crear las máquinas virtuales y la Red NAT,"Crear en VirtualBox la Red NAT red_incidencias y las máquinas srv-web, srv-backup, cliente-usuario y cliente-técnico.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-12
+Estimación: 4 h
+Criterio de finalización: Las cuatro máquinas se ven entre sí por la red 192.168.50.0/24.",Task,Fase3-Desarrollo,11/01/2027,12/01/2027,14400,Pendiente
+GI-14 · Instalar Ubuntu Server 26.04 y configurar red y SSH,"Instalar el sistema en srv-web y srv-backup, IP fija con Netplan, actualizar y configurar SSH con clave sin acceso root.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-13
+Estimación: 4 h
+Criterio de finalización: Acceso por SSH con clave a los dos servidores desde cliente-técnico.",Task,Fase3-Desarrollo,13/01/2027,15/01/2027,14400,Pendiente
+"GI-15 · Instalar Apache, PHP 8.5-FPM y MySQL 8.4","Instalar la pila web en srv-web, crear la base de datos y un usuario con permisos solo sobre ella.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-14
+Estimación: 5 h
+Criterio de finalización: Página de prueba PHP servida por Apache y conexión a MySQL con el usuario de la aplicación.",Task,Fase3-Desarrollo,18/01/2027,22/01/2027,18000,Pendiente
+GI-16 · Crear el proyecto Laravel 13,"Crear el proyecto, configurar .env, Bootstrap y AdminLTE y subirlo al repositorio.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-04
+Estimación: 3 h
+Criterio de finalización: Proyecto arrancando en local y subido a GitHub.",Task,Fase3-Desarrollo,18/01/2027,22/01/2027,10800,Pendiente
+GI-17 · Migraciones y datos iniciales,"Crear las tablas USUARIOS, INCIDENCIAS, COMENTARIOS e HISTORIAL_ESTADOS con sus claves, y seeders con usuarios de prueba.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-11, GI-16
+Estimación: 5 h
+Criterio de finalización: php artisan migrate --seed crea la base de datos completa sin errores.",Task,Fase3-Desarrollo,25/01/2027,29/01/2027,18000,Pendiente
+GI-18 · Inicio de sesión y control de acceso por perfil,"Login, cierre de sesión con confirmación y protección de rutas según el perfil (usuario o técnico).
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-17
+Estimación: 6 h
+Criterio de finalización: Cada perfil solo accede a sus pantallas; un usuario no puede abrir rutas del técnico.",Task,Fase3-Desarrollo,01/02/2027,05/02/2027,21600,Pendiente
+GI-19 · Pantallas del usuario: Mis incidencias y Nueva incidencia,"Formulario de registro con validación y listado de las incidencias propias con su estado.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-18
+Estimación: 8 h
+Criterio de finalización: Un usuario crea una incidencia y la ve en su listado con estado Abierta.",Task,Fase3-Desarrollo,08/02/2027,12/02/2027,28800,Pendiente
+GI-20 · Comentarios con archivo adjunto,"Añadir comentarios (internos o visibles) con un adjunto opcional guardado en la zona privada de Laravel.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-19
+Estimación: 6 h
+Criterio de finalización: Se suben imágenes y PDF de hasta 5 MB; otros tipos se rechazan.",Task,Fase3-Desarrollo,15/02/2027,19/02/2027,21600,Pendiente
+"GI-21 · Pantallas del técnico: Panel, Todas, Asignadas y Detalle","Panel con indicadores, listados con filtros, detalle de la incidencia, asignación de técnico, cambio de estado e historial.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-19
+Estimación: 14 h
+Criterio de finalización: Cada cambio de estado queda guardado en HISTORIAL_ESTADOS con fecha y autor.",Task,Fase3-Desarrollo,22/02/2027,05/03/2027,50400,Pendiente
+GI-22 · Gestión de usuarios y Mi perfil,"Alta, edición y desactivación de cuentas (técnico) y edición de datos y contraseña (usuario).
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-18
+Estimación: 6 h
+Criterio de finalización: Una cuenta desactivada no puede iniciar sesión.",Task,Fase3-Desarrollo,08/03/2027,12/03/2027,21600,Pendiente
+GI-23 · Módulo de informes,"Informe por periodo, categoría y técnico con totales, tiempo medio de resolución y gráficas.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-21
+Estimación: 6 h
+Criterio de finalización: Los datos del informe coinciden con una consulta SQL hecha a mano.",Task,Fase3-Desarrollo,15/03/2027,19/03/2027,21600,Pendiente
+GI-24 · HTTPS con CA propia y VirtualHost,"Crear la CA con OpenSSL, emitir el certificado de incidencias.local, configurar el VirtualHost 443 y redirigir el 80.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-15
+Estimación: 4 h
+Criterio de finalización: https://incidencias.local abre sin aviso en los clientes y http redirige a https.",Task,Fase3-Desarrollo,01/03/2027,05/03/2027,14400,Pendiente
+GI-25 · Cortafuegos UFW y Fail2ban,"Política de denegar por defecto, abrir solo 80/443, SSH desde la red interna y 10050 desde srv-backup; Fail2ban para SSH.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-15
+Estimación: 3 h
+Criterio de finalización: ufw status muestra solo las reglas previstas y Fail2ban bloquea tras varios intentos fallidos.",Task,Fase3-Desarrollo,08/03/2027,12/03/2027,10800,Pendiente
+GI-26 · Script de copias de seguridad con cron y rsync,"Script Bash con mysqldump, copia de adjuntos y .env, envío a srv-backup y rotación de 7 días.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-15, GI-17
+Estimación: 5 h
+Criterio de finalización: La copia aparece cada día en srv-backup y se borran las de más de 7 días.",Task,Fase3-Desarrollo,15/03/2027,19/03/2027,18000,Pendiente
+GI-27 · Monitorización con Zabbix,"Instalar Zabbix Server en srv-backup y el agente en srv-web; plantillas de Linux, Apache y MySQL y alertas.
+
+Fase: 3. Desarrollo e implementación
+Depende de: GI-14
+Estimación: 5 h
+Criterio de finalización: Zabbix muestra las gráficas de srv-web y genera una alerta al parar Apache.",Task,Fase3-Desarrollo,22/03/2027,26/03/2027,18000,Pendiente
+GI-28 · Pruebas funcionales por perfil,"Recorrer todas las pantallas con un usuario y con un técnico siguiendo una lista de casos de prueba.
+
+Fase: 4. Pruebas y validación
+Depende de: GI-20, GI-21, GI-22, GI-23
+Estimación: 10 h
+Criterio de finalización: Todos los casos de prueba superados o con su error registrado en Jira.",Task,Fase4-Pruebas,05/04/2027,14/04/2027,36000,Pendiente
+GI-29 · Pruebas de seguridad,"Acceso a rutas sin permiso, subida de archivos no permitidos, escaneo de puertos con nmap y prueba de Fail2ban.
+
+Fase: 4. Pruebas y validación
+Depende de: GI-24, GI-25, GI-28
+Estimación: 4 h
+Criterio de finalización: Ninguna prueba consigue acceder a datos o puertos no permitidos.",Task,Fase4-Pruebas,15/04/2027,16/04/2027,14400,Pendiente
+GI-30 · Prueba de restauración de una copia,"Restaurar la base de datos y los adjuntos en limpio a partir de una copia de srv-backup.
+
+Fase: 4. Pruebas y validación
+Depende de: GI-26
+Estimación: 3 h
+Criterio de finalización: La aplicación funciona con los datos restaurados.",Task,Fase4-Pruebas,19/04/2027,21/04/2027,10800,Pendiente
+GI-31 · Prueba de alertas de Zabbix,"Provocar fallos controlados (parar Apache o MySQL, llenar disco) y comprobar las alertas.
+
+Fase: 4. Pruebas y validación
+Depende de: GI-27
+Estimación: 2 h
+Criterio de finalización: Cada fallo provocado genera su alerta en Zabbix.",Task,Fase4-Pruebas,19/04/2027,23/04/2027,7200,Pendiente
+GI-32 · Despliegue final en srv-web,"Clonar la versión final desde GitHub, composer install --no-dev, compilar recursos y migrar.
+
+Fase: 5. Despliegue y puesta en marcha
+Depende de: GI-28, GI-29
+Estimación: 4 h
+Criterio de finalización: La aplicación funciona en https://incidencias.local con la última versión del repositorio.",Task,Fase5-Despliegue,26/04/2027,30/04/2027,14400,Pendiente
+GI-33 · Datos de ejemplo y prueba desde los clientes,"Cargar usuarios e incidencias de ejemplo y probar desde cliente-usuario y cliente-técnico.
+
+Fase: 5. Despliegue y puesta en marcha
+Depende de: GI-32
+Estimación: 3 h
+Criterio de finalización: Ambos clientes usan la aplicación sin errores.",Task,Fase5-Despliegue,03/05/2027,07/05/2027,10800,Pendiente
+GI-34 · Manual de usuario y de administración,"Guías con capturas para el usuario, el técnico y el administrador del servidor.
+
+Fase: 5. Despliegue y puesta en marcha
+Depende de: GI-32
+Estimación: 8 h
+Criterio de finalización: Manuales subidos al repositorio en docs/manuales.",Task,Fase5-Despliegue,03/05/2027,14/05/2027,28800,Pendiente
+GI-35 · Mantenimiento: actualizaciones y revisión de registros,"Aplicar actualizaciones de seguridad, revisar registros de Apache y alertas de Zabbix y corregir errores.
+
+Fase: 6. Mantenimiento y soporte
+Depende de: GI-32
+Estimación: 4 h
+Criterio de finalización: Sistema actualizado y sin errores pendientes en Jira.",Task,Fase6-Mantenimiento,17/05/2027,04/06/2027,14400,Pendiente
+GI-36 · Memoria final del proyecto,"Redactar la memoria a partir del anteproyecto, con el desarrollo, las pruebas y las conclusiones.
+
+Fase: 6. Mantenimiento y soporte
+Depende de: GI-34
+Estimación: 15 h
+Criterio de finalización: Memoria entregada en Moodle.",Task,Fase6-Mantenimiento,17/05/2027,04/06/2027,54000,Pendiente
+GI-37 · Presentación y defensa,"Preparar la presentación y la demostración en directo de la aplicación y la infraestructura.
+
+Fase: 6. Mantenimiento y soporte
+Depende de: GI-36
+Estimación: 6 h
+Criterio de finalización: Presentación preparada y demo ensayada.",Task,Fase6-Mantenimiento,07/06/2027,18/06/2027,21600,Pendiente

@@ -1,0 +1,50 @@
+digraph ER {
+  graph [rankdir=LR, nodesep=0.5, ranksep=0.9, fontname="Liberation Sans", bgcolor="white", pad=0.3];
+  node [shape=plaintext, fontname="Liberation Sans", fontsize=15];
+  edge [fontname="Liberation Sans", fontsize=13, color="#365f91", fontcolor="#1f3a5a", arrowhead=none, penwidth=1.4];
+  USUARIOS [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#365f91">
+   <TR><TD BGCOLOR="#365f91"><FONT COLOR="white"><B>USUARIOS</B></FONT></TD></TR>
+   <TR><TD ALIGN="LEFT"><U><B>id</B></U> (PK)</TD></TR>
+   <TR><TD ALIGN="LEFT">nombre, apellidos</TD></TR>
+   <TR><TD ALIGN="LEFT">email (único)</TD></TR>
+   <TR><TD ALIGN="LEFT">password (hash)</TD></TR>
+   <TR><TD ALIGN="LEFT">departamento</TD></TR>
+   <TR><TD ALIGN="LEFT">rol (ENUM: usuario, tecnico)</TD></TR>
+   <TR><TD ALIGN="LEFT">activo</TD></TR></TABLE>>];
+  INCIDENCIAS [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#2f4f6f">
+   <TR><TD BGCOLOR="#2f4f6f"><FONT COLOR="white"><B>INCIDENCIAS</B></FONT></TD></TR>
+   <TR><TD ALIGN="LEFT"><U><B>id</B></U> (PK)</TD></TR>
+   <TR><TD ALIGN="LEFT">codigo (único)</TD></TR>
+   <TR><TD ALIGN="LEFT">titulo, descripcion</TD></TR>
+   <TR><TD ALIGN="LEFT">categoria (ENUM)</TD></TR>
+   <TR><TD ALIGN="LEFT">prioridad (ENUM)</TD></TR>
+   <TR><TD ALIGN="LEFT">estado (ENUM)</TD></TR>
+   <TR><TD ALIGN="LEFT">tipo_atencion (ENUM: remota, presencial)</TD></TR>
+   <TR><TD ALIGN="LEFT">ubicacion</TD></TR>
+   <TR><TD ALIGN="LEFT">solucion</TD></TR>
+   <TR><TD ALIGN="LEFT" BALIGN="LEFT">fecha_creacion, fecha_resolucion,<BR/>fecha_cierre</TD></TR>
+   <TR><TD ALIGN="LEFT"><I>usuario_id (FK) – quien la reporta</I></TD></TR>
+   <TR><TD ALIGN="LEFT"><I>tecnico_id (FK, opcional) – asignado</I></TD></TR></TABLE>>];
+  COMENTARIOS [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#365f91">
+   <TR><TD BGCOLOR="#365f91"><FONT COLOR="white"><B>COMENTARIOS</B></FONT></TD></TR>
+   <TR><TD ALIGN="LEFT"><U><B>id</B></U> (PK)</TD></TR>
+   <TR><TD ALIGN="LEFT">texto</TD></TR>
+   <TR><TD ALIGN="LEFT">interno (sí/no)</TD></TR>
+   <TR><TD ALIGN="LEFT">ruta_adjunto (opcional)</TD></TR>
+   <TR><TD ALIGN="LEFT">fecha</TD></TR>
+   <TR><TD ALIGN="LEFT"><I>incidencia_id (FK)</I></TD></TR>
+   <TR><TD ALIGN="LEFT"><I>usuario_id (FK) – autor</I></TD></TR></TABLE>>];
+  HISTORIAL [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5" COLOR="#365f91">
+   <TR><TD BGCOLOR="#365f91"><FONT COLOR="white"><B>HISTORIAL_ESTADOS</B></FONT></TD></TR>
+   <TR><TD ALIGN="LEFT"><U><B>id</B></U> (PK)</TD></TR>
+   <TR><TD ALIGN="LEFT">estado_anterior (ENUM)</TD></TR>
+   <TR><TD ALIGN="LEFT">estado_nuevo (ENUM)</TD></TR>
+   <TR><TD ALIGN="LEFT">observacion</TD></TR>
+   <TR><TD ALIGN="LEFT">fecha</TD></TR>
+   <TR><TD ALIGN="LEFT"><I>incidencia_id (FK)</I></TD></TR>
+   <TR><TD ALIGN="LEFT"><I>usuario_id (FK) – quien lo cambia</I></TD></TR></TABLE>>];
+  USUARIOS -> INCIDENCIAS [label="  reporta\n  1 : N"];
+  USUARIOS -> INCIDENCIAS [label="  atiende\n  1 : N (opcional)", style=dashed];
+  INCIDENCIAS -> COMENTARIOS [label="  tiene\n  1 : N"];
+  INCIDENCIAS -> HISTORIAL [label="  registra\n  1 : N"];
+}

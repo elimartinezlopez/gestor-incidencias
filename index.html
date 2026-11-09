@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestor de Incidencias · Proyecto Intermodular ASIR</title>
+<meta name="description" content="Sistema web de gestión de incidencias informáticas para pequeñas organizaciones. Proyecto Intermodular de ASIR de Elida Martinez López.">
+<style>
+:root{
+  --ink:#1d2733; --muted:#5b6878; --line:#dfe6ee; --bg:#f5f8fb; --card:#fff;
+  --brand:#2f4f6f; --brand2:#365f91; --accent:#4f81bd; --ok:#2e7d4f; --warn:#c98a1b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:var(--brand2)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--brand);text-decoration:none}
+.logo span{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:13px}
+nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+nav a:hover{color:var(--brand2)}
+.hero{background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;padding:72px 0 64px}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:20px;font-size:13px;margin-bottom:18px}
+.hero h1{font-size:clamp(28px,4.5vw,44px);line-height:1.15;max-width:800px}
+.hero p{font-size:18px;opacity:.92;max-width:720px;margin-top:16px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:8px;font-weight:600;text-decoration:none;font-size:15px}
+.btn.w{background:#fff;color:var(--brand)}
+.btn.o{border:1.5px solid rgba(255,255,255,.7);color:#fff}
+.meta{margin-top:26px;font-size:14px;opacity:.85}
+section{padding:64px 0}
+section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+h2{font-size:28px;color:var(--brand);margin-bottom:8px}
+.lead{color:var(--muted);max-width:760px;margin-bottom:28px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.card h3{font-size:17px;margin-bottom:6px;color:var(--ink)}
+.card p,.card li{color:var(--muted);font-size:15px}
+.card ul{padding-left:18px}
+.prob{border-left:4px solid #c0392b}
+.sol{border-left:4px solid var(--ok)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{background:#eef3f9;border:1px solid #d6e1ee;color:var(--brand);border-radius:16px;padding:3px 11px;font-size:13px}
+.status{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.ph{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
+.ph:last-child{border-bottom:0}
+.ph .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:#eef1f5;color:var(--muted)}
+.ph.done .n{background:var(--ok);color:#fff}
+.ph.now .n{background:var(--warn);color:#fff}
+.ph b{display:block}
+.ph small{color:var(--muted)}
+.badge{font-size:12px;font-weight:600;padding:3px 10px;border-radius:12px;background:#eef1f5;color:var(--muted);white-space:nowrap}
+.ph.done .badge{background:#e3f3ea;color:var(--ok)}
+.ph.now .badge{background:#fbf0dc;color:#94650f}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.shot{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.shot img{width:100%;display:block;border-bottom:1px solid var(--line)}
+.shot p{padding:10px 14px;font-size:14px;color:var(--muted)}
+.shot b{color:var(--ink)}
+.diagram{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+.diagram img{width:100%;display:block}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--brand2);color:#fff;font-weight:600}
+.tbl{overflow-x:auto}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.links a.card{text-decoration:none;transition:transform .15s,box-shadow .15s}
+.links a.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(47,79,111,.12)}
+footer{background:var(--brand);color:#d7e2ef;padding:28px 0;font-size:14px}
+@media (max-width:640px){nav{display:none} .ph{grid-template-columns:38px 1fr} .ph .badge{grid-column:2}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="logo" href="#"><span>GI</span>Gestor de Incidencias</a>
+  <nav><a href="#problema">Problema</a><a href="#objetivos">Objetivos</a><a href="#funcionalidades">Funcionalidades</a><a href="#tecnologias">Tecnologías</a><a href="#estado">Estado</a><a href="#diseno">Diseño</a><a href="#enlaces">Enlaces</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="tag">Proyecto Intermodular · ASIR · Curso 2026/2027</div>
+  <h1>Sistema web de gestión de incidencias informáticas para pequeñas organizaciones</h1>
+  <p>Una aplicación web sencilla para que los empleados comuniquen sus problemas informáticos y el personal técnico los gestione y resuelva, con todo el seguimiento en un solo lugar. Desplegada sobre una infraestructura propia, segura y monitorizada.</p>
+  <div class="btns">
+    <a class="btn w" href="https://github.com/elimartinezlopez/gestor-incidencias">Ver repositorio en GitHub</a>
+    <a class="btn o" href="https://iestriana-team-phdb80bn.atlassian.net/jira/software/projects/KAN/boards/1">Tablero Kanban en Jira</a>
+  </div>
+  <div class="meta">Elida Martinez López · Departamento de Informática</div>
+</div></div>
+
+<section id="problema"><div class="wrap">
+  <h2>¿Qué problema resuelve?</h2>
+  <p class="lead">En una organización pequeña los problemas informáticos llegan por WhatsApp, por correo, por teléfono o en el pasillo. El resultado es fácil de imaginar.</p>
+  <div class="grid g2">
+    <div class="card prob"><h3>Sin el sistema</h3><ul>
+      <li>Incidencias que se pierden o se olvidan.</li>
+      <li>Nadie sabe en qué estado está cada problema.</li>
+      <li>No queda historial de cómo se resolvió algo parecido.</li>
+      <li>El técnico no puede priorizar lo urgente.</li></ul></div>
+    <div class="card sol"><h3>Con el sistema</h3><ul>
+      <li>Cada incidencia queda registrada desde que se abre hasta que se cierra.</li>
+      <li>El usuario ve en todo momento cómo va su incidencia.</li>
+      <li>El técnico clasifica, prioriza y comenta en un único panel.</li>
+      <li>Historial completo e informes para mejorar el soporte.</li></ul></div>
+  </div>
+  <p class="lead" style="margin-top:22px;margin-bottom:0">Existen herramientas profesionales como osTicket, GLPI, Zammad o Jira Service Management, pero son demasiado completas o caras para este caso. Este proyecto implementa solo lo necesario y, además, cubre todo el ciclo de vida del servicio: aplicación, servidor, seguridad, copias de seguridad y monitorización.</p>
+</div></section>
+
+<section id="objetivos" class="alt"><div class="wrap">
+  <h2>Objetivos</h2>
+  <p class="lead">Diseñar, desarrollar e implementar un sistema web para registrar, gestionar y hacer el seguimiento de incidencias informáticas en pequeñas organizaciones.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Aplicación web</h3><p>Autenticación con dos perfiles, registro de incidencias con categoría, prioridad y estado, comentarios, adjuntos e historial.</p></div>
+    <div class="card"><h3>Base de datos</h3><p>Modelo Entidad-Relación implementado en MySQL, con integridad referencial y un usuario de permisos mínimos.</p></div>
+    <div class="card"><h3>Servidor y seguridad</h3><p>Ubuntu Server con Apache, acceso solo por HTTPS, cortafuegos UFW, SSH con clave y Fail2ban.</p></div>
+    <div class="card"><h3>Copias de seguridad</h3><p>Copia diaria automatizada de la base de datos y los adjuntos, enviada a otro servidor y probada con una restauración.</p></div>
+    <div class="card"><h3>Monitorización</h3><p>Zabbix vigila CPU, memoria, disco y los servicios Apache y MySQL, y avisa cuando algo falla.</p></div>
+    <div class="card"><h3>Organización</h3><p>Trabajo planificado en 37 tareas, con seguimiento en un tablero Kanban de Jira y documentación en GitHub.</p></div>
+  </div>
+</div></section>
+
+<section id="funcionalidades"><div class="wrap">
+  <h2>Funcionalidades previstas</h2>
+  <p class="lead">Dos perfiles fijos con su propio menú. Estados de una incidencia: Abierta → Asignada → En curso → (En espera) → Resuelta → Cerrada.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Usuario</h3><ul>
+      <li>Registrar una incidencia y adjuntar una captura del error.</li>
+      <li>Consultar sus incidencias y su estado.</li>
+      <li>Comentar, confirmar la solución o reabrir la incidencia.</li>
+      <li>Editar su perfil y cambiar la contraseña.</li></ul></div>
+    <div class="card"><h3>Técnico / administrador</h3><ul>
+      <li>Panel con indicadores y listado de todas las incidencias con filtros.</li>
+      <li>Incidencias asignadas a él, ordenadas por prioridad.</li>
+      <li>Asignar técnico, cambiar prioridad y estado, comentarios internos y solución.</li>
+      <li>Gestión de cuentas de usuario e informes por periodo.</li></ul></div>
+  </div>
+</div></section>
+
+<section id="tecnologias" class="alt"><div class="wrap">
+  <h2>Tecnologías</h2>
+  <p class="lead">Herramientas trabajadas en el ciclo, en sus versiones estables más recientes.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Desarrollo</h3><div class="chips"><span class="chip">PHP 8.5</span><span class="chip">Laravel 13</span><span class="chip">Blade</span><span class="chip">HTML · CSS · JS</span><span class="chip">Bootstrap 5.3</span><span class="chip">AdminLTE 4</span></div></div>
+    <div class="card"><h3>Datos</h3><div class="chips"><span class="chip">MySQL 8.4 LTS</span><span class="chip">Modelo E-R</span><span class="chip">Migraciones Laravel</span></div></div>
+    <div class="card"><h3>Sistemas</h3><div class="chips"><span class="chip">Ubuntu Server 26.04 LTS</span><span class="chip">Apache 2.4 + PHP-FPM</span><span class="chip">VirtualBox</span><span class="chip">Lubuntu</span><span class="chip">Windows 10/11</span></div></div>
+    <div class="card"><h3>Seguridad</h3><div class="chips"><span class="chip">HTTPS · OpenSSL</span><span class="chip">UFW</span><span class="chip">OpenSSH</span><span class="chip">Fail2ban</span></div></div>
+    <div class="card"><h3>Copias y monitorización</h3><div class="chips"><span class="chip">Bash</span><span class="chip">cron</span><span class="chip">mysqldump</span><span class="chip">rsync</span><span class="chip">Zabbix 7.0 LTS</span></div></div>
+    <div class="card"><h3>Gestión del proyecto</h3><div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">GitHub Pages</span><span class="chip">Jira</span></div></div>
+  </div>
+</div></section>
+
+<section id="estado"><div class="wrap">
+  <h2>Estado actual del proyecto</h2>
+  <p class="lead">El proyecto está terminando la planificación inicial y ha comenzado el análisis y diseño. La aplicación se desarrollará a partir de enero de 2027.</p>
+  <div class="status">
+    <div class="ph now"><div class="n">1</div><div><b>Planificación inicial</b><small>Anteproyecto, tablero Jira, repositorio, README y web · oct – nov 2026</small></div><span class="badge">En curso</span></div>
+    <div class="ph now"><div class="n">2</div><div><b>Análisis y diseño</b><small>Requisitos, flujo de estados, prototipos, arquitectura y modelo E-R · nov – dic 2026</small></div><span class="badge">Iniciada</span></div>
+    <div class="ph"><div class="n">3</div><div><b>Desarrollo e implementación</b><small>Servidores, aplicación Laravel, HTTPS, cortafuegos, copias y Zabbix · ene – mar 2027</small></div><span class="badge">Pendiente</span></div>
+    <div class="ph"><div class="n">4</div><div><b>Pruebas y validación</b><small>Pruebas funcionales y de seguridad, restauración y alertas · abr 2027</small></div><span class="badge">Pendiente</span></div>
+    <div class="ph"><div class="n">5</div><div><b>Despliegue y puesta en marcha</b><small>Despliegue final, datos de ejemplo y manuales · abr – may 2027</small></div><span class="badge">Pendiente</span></div>
+    <div class="ph"><div class="n">6</div><div><b>Mantenimiento y soporte</b><small>Actualizaciones, memoria final y defensa · may – jun 2027</small></div><span class="badge">Pendiente</span></div>
+  </div>
+</div></section>
+
+<section id="diseno" class="alt"><div class="wrap">
+  <h2>Diseño técnico</h2>
+  <p class="lead">Arquitectura de la solución: los clientes acceden por HTTPS a srv-web, donde el cortafuegos filtra el tráfico, Apache entrega las peticiones a Laravel y este consulta MySQL. srv-backup monitoriza con Zabbix y guarda las copias de seguridad.</p>
+  <div class="diagram"><a href="docs/diseno/diagramas/arquitectura.png"><img src="docs/diseno/diagramas/arquitectura.png" alt="Diagrama de arquitectura e infraestructura del proyecto" loading="lazy"></a></div>
+
+  <h3 style="margin:36px 0 14px;color:var(--brand)">Prototipos de las pantallas</h3>
+  <div class="shots">
+    <div class="shot"><img src="docs/diseno/prototipos/03-usuario-nueva-incidencia.png" alt="Nueva incidencia" loading="lazy"><p><b>Nueva incidencia</b> · el usuario describe el problema y adjunta una captura.</p></div>
+    <div class="shot"><img src="docs/diseno/prototipos/05-tecnico-panel.png" alt="Panel del técnico" loading="lazy"><p><b>Panel del técnico</b> · indicadores e incidencias pendientes.</p></div>
+    <div class="shot"><img src="docs/diseno/prototipos/06-tecnico-todas-las-incidencias.png" alt="Todas las incidencias" loading="lazy"><p><b>Todas las incidencias</b> · listado con filtros.</p></div>
+    <div class="shot"><img src="docs/diseno/prototipos/07-tecnico-detalle-incidencia.png" alt="Detalle de una incidencia" loading="lazy"><p><b>Detalle</b> · comentarios, estado, técnico y solución.</p></div>
+    <div class="shot"><img src="docs/diseno/prototipos/09-tecnico-usuarios.png" alt="Usuarios" loading="lazy"><p><b>Usuarios</b> · alta, edición y desactivación de cuentas.</p></div>
+    <div class="shot"><img src="docs/diseno/prototipos/10-tecnico-informes.png" alt="Informes" loading="lazy"><p><b>Informes</b> · resumen del soporte por periodo.</p></div>
+  </div>
+  <p style="margin-top:18px;font-size:15px">Todos los prototipos y diagramas, con sus archivos editables, están en la carpeta <a href="https://github.com/elimartinezlopez/gestor-incidencias/tree/main/docs/diseno">docs/diseno</a> del repositorio.</p>
+</div></section>
+
+<section id="planificacion"><div class="wrap">
+  <h2>Planificación</h2>
+  <p class="lead">6 fases, 37 tareas y unas 204 horas de trabajo estimadas. Cada tarea tiene su descripción, dependencias, fechas, estimación y criterio de finalización.</p>
+  <div class="diagram"><img src="docs/planificacion/cronograma.png" alt="Cronograma de las tareas del proyecto" loading="lazy"></div>
+  <p style="margin-top:14px;font-size:15px"><a href="https://github.com/elimartinezlopez/gestor-incidencias/blob/main/docs/planificacion/tareas.md">Ver el detalle de todas las tareas</a> · <a href="docs/Anteproyecto.pdf">Descargar el anteproyecto (PDF)</a></p>
+</div></section>
+
+<section id="enlaces" class="alt"><div class="wrap">
+  <h2>Enlaces del proyecto</h2>
+  <div class="links">
+    <a class="card" href="https://github.com/elimartinezlopez/gestor-incidencias"><h3>Repositorio en GitHub</h3><p>Documentación, diagramas, prototipos y, más adelante, el código.</p></a>
+    <a class="card" href="https://iestriana-team-phdb80bn.atlassian.net/jira/software/projects/KAN/boards/1"><h3>Tablero Kanban en Jira</h3><p>Todas las tareas y su estado: Pendiente, En curso, En revisión o pruebas y Finalizado.</p></a>
+    <a class="card" href="docs/Anteproyecto.pdf"><h3>Anteproyecto</h3><p>Documento completo con la justificación, el diseño y la planificación.</p></a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">Proyecto Intermodular · CFGS Administración de Sistemas Informáticos en Red · Curso 2026/2027 · Elida Martinez López</div></footer>
+</body>
+</html>
