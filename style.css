@@ -1,0 +1,352 @@
+/* =========================================================
+   ESTILOS DE LA WEB DEL PROYECTO
+   Elida Martinez López - Proyecto Intermodular ASIR
+   ========================================================= */
+
+
+/* ---------- 1. GENERAL: toda la página ---------- */
+
+/* Quito los márgenes que el navegador pone por defecto */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;   /* el borde y el relleno cuentan dentro del ancho */
+}
+
+body {
+  font-family: Arial, sans-serif;   /* tipo de letra */
+  color: #1d2733;                   /* color del texto (gris muy oscuro) */
+  background-color: #f5f8fb;        /* color de fondo (gris muy claro) */
+  line-height: 1.6;                 /* espacio entre líneas */
+}
+
+a {
+  color: #365f91;                   /* color de los enlaces (azul) */
+}
+
+/* Caja que centra el contenido y no deja que se estire demasiado */
+.wrap {
+  max-width: 1080px;    /* ancho máximo */
+  margin: 0 auto;       /* "auto" a los lados = centrado */
+  padding: 0 20px;      /* espacio a izquierda y derecha */
+}
+
+
+/* ---------- 2. BARRA DE ARRIBA (menú) ---------- */
+
+header.top {
+  background-color: white;
+  border-bottom: 1px solid #dfe6ee;   /* línea fina debajo */
+  position: sticky;                   /* se queda fija arriba al bajar */
+  top: 0;
+}
+
+header.top .wrap {
+  display: flex;                      /* pone el logo y el menú en fila */
+  justify-content: space-between;     /* logo a la izquierda, menú a la derecha */
+  align-items: center;                /* centrados en vertical */
+  height: 60px;
+}
+
+.logo {
+  font-weight: bold;
+  color: #2f4f6f;
+  text-decoration: none;              /* quita el subrayado del enlace */
+}
+
+/* El círculo azul con las letras "GI" */
+.logo span {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;                  /* centra las letras en vertical */
+  text-align: center;
+  border-radius: 50%;                 /* 50% = círculo */
+  background-color: #4f81bd;
+  color: white;
+  font-size: 13px;
+  margin-right: 8px;
+}
+
+nav a {
+  color: #5b6878;
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 18px;                  /* separación entre las opciones */
+}
+
+nav a:hover {                         /* :hover = al pasar el ratón por encima */
+  color: #365f91;
+}
+
+
+/* ---------- 3. CABECERA AZUL (título grande) ---------- */
+
+.hero {
+  background-color: #2f4f6f;          /* azul oscuro */
+  color: white;
+  padding: 70px 0;                    /* espacio arriba y abajo */
+}
+
+.hero h1 {
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-top: 16px;
+}
+
+/* La etiqueta pequeña de arriba del título */
+.tag {
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 20px;                /* bordes redondeados */
+  padding: 4px 12px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.btns {
+  margin-top: 28px;
+}
+
+/* Los dos botones: GitHub y Jira */
+.btn {
+  display: inline-block;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.btn.w {                              /* botón blanco */
+  background-color: white;
+  color: #2f4f6f;
+}
+
+.btn.o {                              /* botón con solo el borde */
+  border: 2px solid white;
+  color: white;
+}
+
+.meta {
+  margin-top: 26px;
+  font-size: 14px;
+}
+
+
+/* ---------- 4. SECCIONES (cada apartado de la web) ---------- */
+
+section {
+  padding: 60px 0;                    /* espacio arriba y abajo de cada apartado */
+}
+
+section.alt {                         /* secciones con fondo blanco, para alternar */
+  background-color: white;
+}
+
+h2 {
+  font-size: 28px;
+  color: #2f4f6f;
+  margin-bottom: 8px;
+}
+
+.lead {                               /* texto de introducción de cada sección */
+  color: #5b6878;
+  margin-bottom: 28px;
+}
+
+
+/* ---------- 5. TARJETAS en columnas ---------- */
+
+.grid {
+  display: grid;                      /* reparte las tarjetas en columnas */
+  gap: 18px;                          /* separación entre tarjetas */
+}
+
+.g2 {
+  grid-template-columns: 1fr 1fr;     /* 2 columnas iguales */
+}
+
+.g3 {
+  grid-template-columns: 1fr 1fr 1fr; /* 3 columnas iguales */
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #dfe6ee;
+  border-radius: 12px;
+  padding: 20px;                      /* espacio interior */
+}
+
+.card h3 {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.card p,
+.card li {
+  color: #5b6878;
+  font-size: 15px;
+}
+
+.card ul {
+  padding-left: 18px;                 /* sangría de las listas */
+}
+
+/* Raya de color a la izquierda: rojo = problema, verde = solución */
+.prob {
+  border-left: 4px solid #c0392b;
+}
+
+.sol {
+  border-left: 4px solid #2e7d4f;
+}
+
+/* Las "pastillas" de las tecnologías */
+.chip {
+  display: inline-block;
+  background-color: #eef3f9;
+  color: #2f4f6f;
+  border-radius: 16px;
+  padding: 3px 11px;
+  font-size: 13px;
+  margin: 4px 4px 0 0;
+}
+
+
+/* ---------- 6. ESTADO DEL PROYECTO (lista de fases) ---------- */
+
+.status {
+  background-color: white;
+  border: 1px solid #dfe6ee;
+  border-radius: 12px;
+}
+
+.ph {                                 /* cada fila = una fase */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #dfe6ee;
+}
+
+.ph div {
+  flex: 1;                            /* el texto ocupa el espacio que sobra */
+}
+
+.ph .n {                              /* círculo con el número de la fase */
+  flex: none;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #eef1f5;
+  font-weight: bold;
+}
+
+.ph.now .n {                          /* fase en la que estoy: círculo naranja */
+  background-color: #c98a1b;
+  color: white;
+}
+
+.ph b {
+  display: block;                     /* el nombre de la fase en su propia línea */
+}
+
+.ph small {
+  color: #5b6878;
+}
+
+.badge {                              /* la etiqueta "En curso", "Pendiente"... */
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background-color: #eef1f5;
+  color: #5b6878;
+}
+
+
+/* ---------- 7. IMÁGENES (diagrama y prototipos) ---------- */
+
+.diagram {
+  background-color: white;
+  border: 1px solid #dfe6ee;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.diagram img,
+.shot img {
+  width: 100%;                        /* la imagen ocupa todo el ancho de su caja */
+  display: block;
+}
+
+.shots {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 prototipos por fila */
+  gap: 18px;
+}
+
+.shot {
+  background-color: white;
+  border: 1px solid #dfe6ee;
+  border-radius: 12px;
+  overflow: hidden;                   /* recorta la imagen a las esquinas redondeadas */
+}
+
+.shot p {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #5b6878;
+}
+
+
+/* ---------- 8. ENLACES DEL PROYECTO ---------- */
+
+.links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 tarjetas de enlaces */
+  gap: 18px;
+}
+
+.links a.card {
+  text-decoration: none;
+}
+
+.links a.card:hover {                 /* al pasar el ratón, el borde se pone azul */
+  border-color: #365f91;
+}
+
+
+/* ---------- 9. PIE DE PÁGINA ---------- */
+
+footer {
+  background-color: #2f4f6f;
+  color: white;
+  padding: 28px 0;
+  font-size: 14px;
+}
+
+
+/* ---------- 10. MÓVIL: pantallas de menos de 700px ---------- */
+
+@media (max-width: 700px) {
+  nav {
+    display: none;                    /* oculto el menú para que quepa */
+  }
+
+  .g2, .g3, .shots, .links {
+    grid-template-columns: 1fr;       /* todo en 1 columna */
+  }
+
+  .hero h1 {
+    font-size: 28px;                  /* título más pequeño */
+  }
+}

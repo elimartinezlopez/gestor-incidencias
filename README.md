@@ -138,6 +138,7 @@ El trabajo se divide en **6 fases y 37 tareas**, con unas **204 horas** estimada
 gestor-incidencias/
 ├── README.md                  ← esta presentación
 ├── index.html                 ← página web (GitHub Pages)
+├── style.css                  ← estilos de la página web
 └── docs/
     ├── Anteproyecto.pdf
     ├── planificacion/         ← tareas, cronograma y CSV para Jira
